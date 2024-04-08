@@ -1,31 +1,44 @@
-# This is a basic workflow to help you get started with Actions
+#this workflow is written to perform CI/CD of my web application to prod
 
-name: Netlify Deploy
+name: Application Deployment
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
+  workflow_dispatch: 
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Code Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+      
+      
+      - name: Build Image
+        uses: docker/build-push-action@v5
+        with:
+          context: Dockerfile
+          push: false
+          tags: dsamist/mywebsite
+
+      - name: Test image
         run: |
-          echo Hello, Aditya! I am deploying the site to netlify.
-          echo Deployment started...
-          curl -X POST -d {} ${{secrets.netlify_webhook}}
-          echo Deployment done ...
+          docker run -p 3445:443 -v .:/usr/share/nginx/html mywebsite
+          curl --insecure https://localhost:3445
+
+      - name: Push Image to Docker hub
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: dsamist/mywebsite
+ 
+        
+
