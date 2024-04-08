@@ -27,7 +27,7 @@ jobs:
         with:
           context: .
           push: false
-          tags: dsamist/mywebsite
+          tags: dsamist/mywebsite:${{ github.sha }}
           secrets: |
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: dsamist/mywebsite
+          tags: dsamist/mywebsite:${{ github.sha }}
           secrets: |
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
