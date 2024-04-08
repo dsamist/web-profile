@@ -36,7 +36,7 @@ jobs:
       - name: Test image
         run: |
           docker run -dp 3445:443 -v .:/usr/share/nginx/html dsamist/mywebsite
-          curl --insecure https://localhost:3445
+          curl -s --insecure https://localhost:3445 | grep -i live
 
       - name: Push Image to Docker hub
         uses: docker/build-push-action@v5
