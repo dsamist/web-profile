@@ -8,7 +8,7 @@ ARG CERTIFICATE_KEY
 ARG NGINX_CONF
 #copy nginx configuratio
 #COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-COPY ./$NGINX_CONF /etc/nginx/conf.d/default.conf
+COPY ./$NGINX_CONF /etc/nginx/conf.d/
 
 #copy ssl files to the image
 #COPY ./dsamist_me_cert/ /etc/nginx/ssl/
