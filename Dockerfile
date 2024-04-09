@@ -2,6 +2,8 @@
 FROM nginx:latest
 
 #create env variables for secrets (certificates and configuration)
+#this will be populated when from the github secrets and variables through the github action workflow.
+#this is done so that I can ignore pushing the certificate and config files to github repo
 
 ENV CERTIFICATE_CRT /etc/nginx/ssl/dsamist_me.crt
 ENV CERTIFICATE_KEY /etc/nginx/ssl/dsamistme.key
