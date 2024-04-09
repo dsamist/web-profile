@@ -26,7 +26,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          push: false
+          push: true
           tags: dsamist/mywebsite:${{ github.sha }}
           secrets:
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
