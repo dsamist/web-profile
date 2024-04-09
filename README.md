@@ -35,6 +35,7 @@ Deployment is done on AKS
 
 * **Aditya Gundecha** - *Initial work* (original Author)
 * **Samuel Emmanuel** - *Modified for myself*
+* **Esther Onwochei** - *Assisted with graphics designs*
 
 ## License
 
