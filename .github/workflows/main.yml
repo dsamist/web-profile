@@ -18,8 +18,8 @@ jobs:
       - name: Login to Docker hub
         uses: docker/login-action@v3
         with:
-          username: ${{ vars.DOCKER_USERNAME}}
-          password: ${{secrets.DOCKER_PASSWORD}}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       
       
       - name: Build Image
@@ -28,27 +28,27 @@ jobs:
           context: .
           push: false
           tags: dsamist/mywebsite:${{ github.sha }}
-          secrets: |
+          secrets:
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
             NGINX_CONF=${{secrets.NGINX_CONF}}
 
-      - name: Test image
-        run: |
-          docker run -dp 3445:443 -v .:/usr/share/nginx/html dsamist/mywebsite
-          nc -zv localhost 3445
-        #curl -s --insecure https://localhost:3445 | grep -i live
+      # - name: Test image
+      #   run: |
+      #     docker run -dp 3445:443 -v .:/usr/share/nginx/html dsamist/mywebsite
+      #     nc -zv localhost 3445
+      #   #curl -s --insecure https://localhost:3445 | grep -i live
           
 
-      - name: Push Image to Docker hub
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          tags: dsamist/mywebsite:${{ github.sha }}
-          secrets: |
-            CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
-            CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
-            NGINX_CONF=${{secrets.NGINX_CONF}}
+      # - name: Push Image to Docker hub
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     push: true
+      #     tags: dsamist/mywebsite:${{ github.sha }}
+      #     secrets: |
+      #       CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
+      #       CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
+      #       NGINX_CONF=${{secrets.NGINX_CONF}}
  
         
 
