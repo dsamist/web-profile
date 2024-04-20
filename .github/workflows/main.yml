@@ -45,7 +45,7 @@ jobs:
       - name: Install Kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: 'default'
+          version: 'v1.26.0'
         id: install
       
       #set the k8s config
