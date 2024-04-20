@@ -1,3 +1,4 @@
 .history
 dsamist_me_cert*/
 nginx.conf
+kubernetes/k8s-web-profile-kubeconfig.yaml

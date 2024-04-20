@@ -33,22 +33,35 @@ jobs:
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
             NGINX_CONF=${{secrets.NGINX_CONF}}
 
-      # - name: Test image
-      #   run: |
-      #     docker run -dp 3445:443 -v .:/usr/share/nginx/html dsamist/mywebsite
-      #     nc -zv localhost 3445
-      #   #curl -s --insecure https://localhost:3445 | grep -i live
-          
 
-      # - name: Push Image to Docker hub
-      #   uses: docker/build-push-action@v5
-      #   with:
-      #     push: true
-      #     tags: dsamist/mywebsite:${{ github.sha }}
-      #     secrets: |
-      #       CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
-      #       CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
-      #       NGINX_CONF=${{secrets.NGINX_CONF}}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps: 
+      - name: code checkout
+        uses: actions/checkout@v4
+
+      #install kubectl
+      - name: Install Kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: default
+        id: install
+      
+      #set the k8s config
+      - name: Set the kubernetes config file
+        uses: azure/k8s-set-context@v4
+        with: 
+          method: kubeconfig
+          kubeconfig: ${{secrets.KUBECONFIG}}
+      
+      - name: Display k8s cluster details
+        run: |
+          kubectl version --short -o yaml
+          echo --------------------------
+          kubectl get nodes
+          kubectl get namespaces
+
  
         
 
