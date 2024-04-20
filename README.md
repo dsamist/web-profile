@@ -2,7 +2,7 @@
 
 | **Licence**  | [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  |
 |---|---|
-| **Deploy status**  |  [![Azure App Service](https://azure.microsoft.com/en-us/products/app-services) |
+| **Deploy status**  |  [![K8s on Digital Ocean](https://cloud.digitalocean.com) |
 
 
 A website to showcase DevOps professional portfolio
@@ -33,7 +33,6 @@ Deployment is done on AKS
 
 ## Authors
 
-* **Aditya Gundecha** - *Initial work* (original Author)
 * **Samuel Emmanuel** - *Modified for myself*
 * **Esther Onwochei** - *Assisted with graphics designs*
 
