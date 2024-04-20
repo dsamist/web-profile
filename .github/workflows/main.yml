@@ -27,7 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ vars.DOCKERHUB_USERNAME }}/mywebsite:${{ github.sha }}
+          tags: ${{ vars.DOCKER_USERNAME }}/mywebsite:${{ github.sha }}
           secrets:
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
@@ -72,7 +72,7 @@ jobs:
         env:
           NAMESPACE: ${{ vars.NAMESPACE }}
           REPLICAS: ${{ vars.REPLICAS }}
-          IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/mywebsite:${{ github.sha }}
+          IMAGE: ${{ vars.DOCKER_USERNAME }}/mywebsite:${{ github.sha }}
           DNS_HOST: ${{ vars.DNS_HOST }}
       
       #deploy k8s object to the cluster
