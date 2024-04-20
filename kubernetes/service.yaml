@@ -1,15 +1,39 @@
+# kind: Service
+# apiVersion: v1
+# metadata:
+#   labels:
+#     app: web-profile
+#   name: web-profile
+#   namespace: web-profile
+# spec:
+#   # type: LoadBalancer
+#   selector:
+#     app: web-profile
+#   ports:
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 80
+#     # - name: https
+#     #   protocol: TCP
+#     #   port: 443
+#     #   targetPort: 80
+
+# # ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app: web-profile
   name: web-profile
-  namespace: web-profile
+  namespace: _{_NAMESPACE_}_
 spec:
   ports:
-  - port: 3446
+  - port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: web-profile
-  type: LoadBalancer
+#   type: LoadBalancer
+
+

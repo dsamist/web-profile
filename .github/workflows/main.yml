@@ -27,7 +27,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: dsamist/mywebsite:${{ github.sha }}
+          tags: ${{ vars.DOCKERHUB_USERNAME }}/mywebsite:${{ github.sha }}
           secrets:
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
@@ -61,12 +61,26 @@ jobs:
           echo --------------------------
           kubectl get nodes
           kubectl get namespaces
+
+
+      - name: Replace placeholders token in k8s manifest files
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '_{_'
+          tokenSuffix: '_}_'
+          files: '["kubernetes/*.yaml"]'
+        env:
+          NAMESPACE: ${{ vars.NAMESPACE }}
+          REPLICAS: ${{ vars.REPLICAS }}
+          IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/mywebsite:${{ github.sha }}
+          DNS_HOST: ${{ vars.DNS_HOST }}
       
       #deploy k8s object to the cluster
       - name: Deploy k8s object to the cluster
         run: |
           kubectl apply -f kubernetes/deployment.yaml
           kubectl apply -f kubernetes/service.yaml
+          kubectl apply -f kubernetes/ingress.yaml
 
  
         

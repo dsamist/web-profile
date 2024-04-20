@@ -4,9 +4,9 @@ metadata:
   labels:
     app: web-profile
   name: web-profile
-  namespace: web-profile
+  namespace: _{_NAMESPACE_}_
 spec:
-  replicas: 1
+  replicas: _{_REPLICAS_}_
   selector:
     matchLabels:
       app: web-profile
@@ -17,7 +17,7 @@ spec:
         app: web-profile
     spec:
       containers:
-      - image: dsamist/mywebsite:v1.2
+      - image: _{_IMAGE_}_
         imagePullPolicy: Always
         name: web-profile
         ports:
