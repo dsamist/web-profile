@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: portfolio
+  name: portfolio
+  namespace: portfolio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: portfolio
+    spec:
+      containers:
+      - image: dsamist/mywebsite:v1.2
+        imagePullPolicy: Always
+        name: portfolio
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        # envFrom:
+        # - secretRef:
+        #     name: mongo-db-creds
