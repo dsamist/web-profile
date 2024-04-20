@@ -61,6 +61,12 @@ jobs:
           echo --------------------------
           kubectl get nodes
           kubectl get namespaces
+      
+      #deploy k8s object to the cluster
+      - name: Deploy k8s object to the cluster
+        run: |
+          kubectl apply -f kubernetes/deployment.yaml
+          kubectl apply -f kubernetes/service.yaml
 
  
         

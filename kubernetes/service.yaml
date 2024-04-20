@@ -2,14 +2,14 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: portfolio
-  name: portfolio
-  namespace: portfolio
+    app: web-profile
+  name: web-profile
+  namespace: web-profile
 spec:
   ports:
   - port: 3446
     protocol: TCP
     targetPort: 80
   selector:
-    app: portfolio
-  type: NodePort
+    app: web-profile
+  type: LoadBalancer

@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: portfolio
-  name: portfolio
-  namespace: portfolio
+    app: web-profile
+  name: web-profile
+  namespace: web-profile
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portfolio
+      app: web-profile
   strategy: {}
   template:
     metadata:
       labels:
-        app: portfolio
+        app: web-profile
     spec:
       containers:
       - image: dsamist/mywebsite:v1.2
         imagePullPolicy: Always
-        name: portfolio
+        name: web-profile
         ports:
         - containerPort: 80
           name: http
