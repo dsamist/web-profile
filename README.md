@@ -34,7 +34,7 @@ Deployment is done on AKS
 ## Authors
 
 * **Samuel Emmanuel** - *Modified for myself*
-[* **Esther Onwochei**](https://www.behance.net/estheronwochei_) - *Assisted with graphics designs*
+* [**Esther Onwochei**](https://www.behance.net/estheronwochei_) - *Assisted with graphics designs*
 
 ## License
 
