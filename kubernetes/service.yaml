@@ -30,7 +30,8 @@ metadata:
 spec:
   ports:
   - port: 80
-    protocol: TCP
+    name: http
+    #protocol: TCP
     targetPort: 80
   selector:
     app: web-profile
