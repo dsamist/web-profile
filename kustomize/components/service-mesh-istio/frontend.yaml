@@ -19,7 +19,7 @@ metadata:
   namespace: web-profile
 spec:
   hosts:
-  - "web-profile.default.svc.cluster.local"
+  - "web-profile.web-profile.svc.cluster.local"
   http:
   - route:
     - destination:

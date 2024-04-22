@@ -25,5 +25,4 @@ patches:
     kind: Service
     metadata:
       name: web-profile
-      namespace: web-profile
     $patch: delete

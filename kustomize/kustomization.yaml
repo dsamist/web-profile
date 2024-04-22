@@ -19,3 +19,4 @@ resources:
 components:
 - components/service-mesh-istio
 - components/service-accounts
+- components/service-mesh-istio/
