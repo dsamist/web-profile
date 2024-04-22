@@ -19,17 +19,12 @@ To get started clone the repository and start coding. Continuous Delivery is imp
 ### Prerequisites
 
 - VS Code or any other editor. (Few that I recommend are Vim, Sublime Text, Notepad++ )
-- Live Server extension for VS Code
-- Git lens for VS Code
+- Github actions extension for VS Code
 - Docker desktop to test the changes and modifications being made 
-
-
-End with an example of getting some data out of the system or using it for a little demo
-
 
 ## Deployment
 
-Deployment is done on AKS
+Live deployment is done on Kubernetes on Digital Ocean cloud
 
 ## Authors
 

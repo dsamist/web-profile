@@ -15,6 +15,17 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v4
 
+
+        #I am adding this to include a vulenrability scanner in my CI/CD pipeline using trivy
+      - name: Run trivy vulnerability scan in file system mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          trivy-config: trivy.yaml
+          # name: Setup QEMU
+          # uses: docker/setup-qemu-action@v2
+
       - name: Login to Docker hub
         uses: docker/login-action@v3
         with:
@@ -32,6 +43,16 @@ jobs:
             CERTIFICATE_CRT=${{secrets.CERTIFICATE_CRT}}
             CERTIFICATE_KEY=${{secrets.CERTIFICATE_KEY}}
             NGINX_CONF=${{secrets.NGINX_CONF}}
+
+      - name: Run trivy vulnerabiliy scanner on my container
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ vars.DOCKER_USERNAME }}/mywebsite:${{ github.sha }}
+          format: 'table'
+          exit-code: '0'     #this exit code is to ensure that the workflow continues even if there's vulnerability. It can be changed to 1 if you want it to stop
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
 
   deploy:
@@ -74,6 +95,26 @@ jobs:
           REPLICAS: ${{ vars.REPLICAS }}
           IMAGE: ${{ vars.DOCKER_USERNAME }}/mywebsite:${{ github.sha }}
           DNS_HOST: ${{ vars.DNS_HOST }}
+
+      - name: scan config files (this can be manifests, helm etc)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scanners: 'config'
+          scan-ref: './kubernetes'
+          hide-progress: false
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          exit-code: '0'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'
+          trivy-config: trivy.yaml 
+
+      - name: Upload result to github security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+
       
       #deploy k8s object to the cluster
       - name: Deploy k8s object to the cluster
