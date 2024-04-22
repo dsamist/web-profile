@@ -58,6 +58,8 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions: 
+      security-events: write
     steps: 
       - name: code checkout
         uses: actions/checkout@v4
@@ -114,6 +116,7 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
+
 
       
       #deploy k8s object to the cluster
