@@ -116,19 +116,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
-
-      - name: Update corresponding helm values file for frontend (with retry)
-        uses: Wandalen/wretry.action@v1.0.36 # Retries action on fail
-        with:
-          action: fjogeleit/yaml-update-action@main # Action to retry
-          with: |
-            valueFile: "mywebsite/values.yaml"
-            propertyPath: "image.tag"
-            value: ${{ github.sha }}
-            branch: master
-            message: "Update locate production image tag to ${{ github.sha }}
-
-
       
       #deploy k8s object to the cluster
       - name: Deploy k8s object to the cluster
