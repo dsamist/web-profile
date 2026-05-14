@@ -198,10 +198,13 @@
             .hero-photo-container { width: 220px; height: 220px; }
             .hero-photo { width: 220px; height: 220px; }
             .hero-photo-ring { inset: -10px; }
-            .hero-stats { justify-content: center; }
+            .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
             .hero-buttons { justify-content: center; }
             .hero-subtitle { margin: 0 auto 2rem; }
             .hero-social { justify-content: center; }
+        }
+        @media (max-width: 480px) {
+            .hero-stats { gap: 1.25rem; }
         }
 
         /* ABOUT */
