@@ -362,15 +362,16 @@
         .award-org { font-size: 0.78rem; color: var(--text-muted); font-family: 'Fira Code', monospace; }
         .award-preview {
             position: absolute; bottom: calc(100% + 12px); left: 50%;
-            width: 320px; height: 420px; max-width: 90vw;
+            width: 280px; max-width: 90vw;
             background: var(--bg-card); border: 1px solid var(--border-accent);
             border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.45);
             opacity: 0; visibility: hidden; pointer-events: none;
             transform: translate(-50%, 8px); transition: opacity 0.2s ease, transform 0.2s ease;
             z-index: 60; overflow: hidden;
         }
-        .award-card:hover .award-preview { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
-        .award-preview iframe { width: 100%; height: 100%; border: 0; display: block; }
+        .award-card:hover .award-preview,
+        .award-card.show-preview .award-preview { opacity: 1; visibility: visible; transform: translate(-50%, 0); pointer-events: auto; }
+        .award-preview img { width: 100%; display: block; }
 
         /* CONTACT */
         #contact { background: var(--bg-primary); }
@@ -915,7 +916,7 @@
                     <div class="award-title">Mandela Scholarship for Leadership Development</div>
                     <div class="award-org">MINDS · 2022</div>
                 </div>
-                <div class="award-preview"><iframe src="documents/awards/mandela-scholarship.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Mandela Scholarship for Leadership Development certificate"></iframe></div>
+                <div class="award-preview"><img src="documents/awards/thumbs/mandela-scholarship-1.jpg" loading="lazy" alt="Mandela Scholarship for Leadership Development certificate"></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-medal"></i></div>
@@ -923,7 +924,7 @@
                     <div class="award-title">Letter of Commendation</div>
                     <div class="award-org">Wema Bank Plc · 2022</div>
                 </div>
-                <div class="award-preview"><iframe src="documents/awards/wema-bank-commendation.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Wema Bank Letter of Commendation"></iframe></div>
+                <div class="award-preview"><img src="documents/awards/thumbs/wema-bank-commendation-1.jpg" loading="lazy" alt="Wema Bank Letter of Commendation"></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-certificate"></i></div>
@@ -931,7 +932,7 @@
                     <div class="award-title">DevOps Certificate of Completion</div>
                     <div class="award-org">Irembo · 2023</div>
                 </div>
-                <div class="award-preview"><iframe src="documents/awards/irembo-devops-certificate.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Irembo DevOps Certificate of Completion"></iframe></div>
+                <div class="award-preview"><img src="documents/awards/thumbs/irembo-devops-certificate-1.jpg" loading="lazy" alt="Irembo DevOps Certificate of Completion"></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-trophy"></i></div>
@@ -939,7 +940,7 @@
                     <div class="award-title">MTN Foundation Scholarship</div>
                     <div class="award-org">2013</div>
                 </div>
-                <div class="award-preview"><iframe src="documents/awards/mtn-foundation-scholarship.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="MTN Foundation Scholarship certificate"></iframe></div>
+                <div class="award-preview"><img src="documents/awards/thumbs/mtn-foundation-scholarship-1.jpg" loading="lazy" alt="MTN Foundation Scholarship certificate"></div>
             </div>
         </div>
     </div>
@@ -1063,6 +1064,22 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Award PDF preview: tap to show/hide on touch devices (no real hover there)
+    document.querySelectorAll('.award-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            if (!window.matchMedia('(hover: none)').matches) return;
+            const wasOpen = card.classList.contains('show-preview');
+            document.querySelectorAll('.award-card.show-preview').forEach(c => c.classList.remove('show-preview'));
+            if (!wasOpen) {
+                card.classList.add('show-preview');
+                e.stopPropagation();
+            }
+        });
+    });
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.award-card.show-preview').forEach(c => c.classList.remove('show-preview'));
+    });
 </script>
 </body>
 </html>
