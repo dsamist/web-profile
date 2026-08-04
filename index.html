@@ -354,11 +354,23 @@
             background: var(--bg-card); border: 1px solid var(--border-card);
             border-radius: 12px; padding: 1.4rem; display: flex;
             align-items: center; gap: 1rem; transition: all 0.3s;
+            position: relative;
         }
         .award-card:hover { border-color: var(--border-accent); transform: translateX(4px); }
         .award-icon { color: #f59e0b; font-size: 1.5rem; flex-shrink: 0; }
         .award-title { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.15rem; }
         .award-org { font-size: 0.78rem; color: var(--text-muted); font-family: 'Fira Code', monospace; }
+        .award-preview {
+            position: absolute; bottom: calc(100% + 12px); left: 50%;
+            width: 320px; height: 420px; max-width: 90vw;
+            background: var(--bg-card); border: 1px solid var(--border-accent);
+            border-radius: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transform: translate(-50%, 8px); transition: opacity 0.2s ease, transform 0.2s ease;
+            z-index: 60; overflow: hidden;
+        }
+        .award-card:hover .award-preview { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+        .award-preview iframe { width: 100%; height: 100%; border: 0; display: block; }
 
         /* CONTACT */
         #contact { background: var(--bg-primary); }
@@ -903,6 +915,7 @@
                     <div class="award-title">Mandela Scholarship for Leadership Development</div>
                     <div class="award-org">MINDS · 2022</div>
                 </div>
+                <div class="award-preview"><iframe src="documents/awards/mandela-scholarship.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Mandela Scholarship for Leadership Development certificate"></iframe></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-medal"></i></div>
@@ -910,6 +923,7 @@
                     <div class="award-title">Letter of Commendation</div>
                     <div class="award-org">Wema Bank Plc · 2022</div>
                 </div>
+                <div class="award-preview"><iframe src="documents/awards/wema-bank-commendation.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Wema Bank Letter of Commendation"></iframe></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-certificate"></i></div>
@@ -917,6 +931,7 @@
                     <div class="award-title">DevOps Certificate of Completion</div>
                     <div class="award-org">Irembo · 2023</div>
                 </div>
+                <div class="award-preview"><iframe src="documents/awards/irembo-devops-certificate.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="Irembo DevOps Certificate of Completion"></iframe></div>
             </div>
             <div class="award-card fade-in">
                 <div class="award-icon"><i class="fas fa-trophy"></i></div>
@@ -924,6 +939,7 @@
                     <div class="award-title">MTN Foundation Scholarship</div>
                     <div class="award-org">2013</div>
                 </div>
+                <div class="award-preview"><iframe src="documents/awards/mtn-foundation-scholarship.pdf#toolbar=0&navpane=0&view=FitH" loading="lazy" title="MTN Foundation Scholarship certificate"></iframe></div>
             </div>
         </div>
     </div>
